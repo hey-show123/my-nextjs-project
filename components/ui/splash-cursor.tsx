@@ -90,6 +90,11 @@ export function SplashCursor({
         gl =
           canvas.getContext("webgl", params) ||
           canvas.getContext("experimental-webgl", params);
+
+      if (!gl) {
+        throw new Error("WebGL not supported");
+      }
+
       let halfFloat;
       let supportLinearFiltering;
       if (isWebGL2) {
@@ -97,9 +102,7 @@ export function SplashCursor({
         supportLinearFiltering = gl.getExtension("OES_texture_float_linear");
       } else {
         halfFloat = gl.getExtension("OES_texture_half_float");
-        supportLinearFiltering = gl.getExtension(
-          "OES_texture_half_float_linear"
-        );
+        supportLinearFiltering = gl.getExtension("OES_texture_half_float_linear");
       }
       gl.clearColor(0.0, 0.0, 0.0, 1.0);
       const halfFloatTexType = isWebGL2
