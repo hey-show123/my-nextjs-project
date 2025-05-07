@@ -238,4 +238,4 @@ export const translations = {
 } as const;
 
 export type Language = keyof typeof translations;
-export type TranslationKey = keyof typeof translations.en;
+export type TranslationKey = keyof typeof translations.en | `contact.form.${keyof typeof translations.en.contact.form}`;
