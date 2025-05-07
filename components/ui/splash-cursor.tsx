@@ -24,17 +24,30 @@ export function SplashCursor({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    function pointerPrototype() {
-      this.id = -1;
-      this.texcoordX = 0;
-      this.texcoordY = 0;
-      this.prevTexcoordX = 0;
-      this.prevTexcoordY = 0;
-      this.deltaX = 0;
-      this.deltaY = 0;
-      this.down = false;
-      this.moved = false;
-      this.color = [0, 0, 0];
+    class Pointer {
+      id: number;
+      texcoordX: number;
+      texcoordY: number;
+      prevTexcoordX: number;
+      prevTexcoordY: number;
+      deltaX: number;
+      deltaY: number;
+      down: boolean;
+      moved: boolean;
+      color: number[];
+
+      constructor() {
+        this.id = -1;
+        this.texcoordX = 0;
+        this.texcoordY = 0;
+        this.prevTexcoordX = 0;
+        this.prevTexcoordY = 0;
+        this.deltaX = 0;
+        this.deltaY = 0;
+        this.down = false;
+        this.moved = false;
+        this.color = [0, 0, 0];
+      }
     }
 
     let config = {
@@ -55,7 +68,7 @@ export function SplashCursor({
       TRANSPARENT,
     };
 
-    let pointers = [new pointerPrototype()];
+    let pointers = [new Pointer()];
 
     const { gl, ext } = getWebGLContext(canvas);
     if (!ext.supportLinearFiltering) {
