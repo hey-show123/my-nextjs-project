@@ -1,12 +1,12 @@
 "use client"
 
 import { createContext, useContext, useState } from "react"
-import { translations, type Language } from "./translations"
+import { translations, type Language, type TranslationKey } from "./translations"
 
 type LanguageContextType = {
   language: Language
   setLanguage: (language: Language) => void
-  t: (section: keyof typeof translations.en, key: string) => string
+  t: (key: TranslationKey, defaultValue: string) => string
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
@@ -14,8 +14,20 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>("en")
 
-  const t = (section: keyof typeof translations.en, key: string): string => {
-    return translations[language][section]?.[key as keyof typeof translations.en[typeof section]] || key
+  const t = (key: TranslationKey, defaultValue: string): string => {
+    if (key.includes('.')) {
+      const parts = key.split('.')
+      let current: any = translations[language]
+      for (const part of parts) {
+        if (current && current[part]) {
+          current = current[part]
+        } else {
+          return defaultValue
+        }
+      }
+      return current || defaultValue
+    }
+    return translations[language][key as keyof typeof translations[typeof language]] || defaultValue
   }
 
   return (

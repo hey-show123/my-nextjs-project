@@ -42,8 +42,8 @@ export function Contact() {
     
     // Simulating form submission
     setTimeout(() => {
-      toast.success(t("contact.form.success", ""), {
-        description: t("contact.form.successDesc", "")
+      toast.success(t("contact.form.success", "Message sent successfully!"), {
+        description: t("contact.form.successDesc", "Thank you for reaching out. I'll get back to you soon.")
       })
       form.reset()
       setIsSubmitting(false)
@@ -61,11 +61,11 @@ export function Contact() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-6">
-              {t("contact", "title")}
+              {t("contact", "Contact")}
             </h2>
             
             <AnimatedText 
-              text={t("contact", "description")}
+              text={t("contact", "I'm always open to discussing new projects, opportunities and collaborations.")}
               className="text-xl text-muted-foreground mb-6"
             />
             
@@ -85,9 +85,9 @@ export function Contact() {
           >
             <Card className="glass-effect">
               <CardHeader>
-                <CardTitle>{t("contact.form.title")}</CardTitle>
+                <CardTitle>{t("contact.form.title", "Send me a message")}</CardTitle>
                 <CardDescription>
-                  {t("contact.form.subtitle")}
+                  {t("contact.form.subtitle", "Fill out the form below to get in touch with me.")}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -99,9 +99,9 @@ export function Contact() {
                         name="name"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>{t("contact.form.name")}</FormLabel>
+                            <FormLabel>{t("contact.form.name", "Name")}</FormLabel>
                             <FormControl>
-                              <Input placeholder={t("contact.form.name")} {...field} />
+                              <Input placeholder={t("contact.form.name", "Name")} {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -112,9 +112,9 @@ export function Contact() {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>{t("contact.form.email")}</FormLabel>
+                            <FormLabel>{t("contact.form.email", "Email")}</FormLabel>
                             <FormControl>
-                              <Input placeholder={t("contact.form.email")} {...field} />
+                              <Input placeholder={t("contact.form.email", "Email")} {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -127,9 +127,9 @@ export function Contact() {
                       name="subject"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("contact.form.subject")}</FormLabel>
+                          <FormLabel>{t("contact.form.subject", "Subject")}</FormLabel>
                           <FormControl>
-                            <Input placeholder={t("contact.form.subject")} {...field} />
+                            <Input placeholder={t("contact.form.subject", "Subject")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -141,10 +141,10 @@ export function Contact() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("contact.form.message")}</FormLabel>
+                          <FormLabel>{t("contact.form.message", "Message")}</FormLabel>
                           <FormControl>
                             <Textarea 
-                              placeholder={t("contact.form.message")}
+                              placeholder={t("contact.form.message", "Message")}
                               className="min-h-[120px] resize-none" 
                               {...field} 
                             />
@@ -156,10 +156,10 @@ export function Contact() {
                     
                     <Button type="submit" className="w-full" disabled={isSubmitting}>
                       {isSubmitting ? (
-                        <>{t("contact.form.sending")}</>
+                        <>{t("contact.form.sending", "Sending")}</>
                       ) : (
                         <>
-                          {t("contact.form.send")} <Send className="ml-2 h-4 w-4" />
+                          {t("contact.form.send", "Send Message")} <Send className="ml-2 h-4 w-4" />
                         </>
                       )}
                     </Button>
@@ -168,7 +168,7 @@ export function Contact() {
               </CardContent>
               <CardFooter className="border-t px-6 py-4">
                 <p className="text-center text-sm text-muted-foreground w-full">
-                  {t("contact.form.privacy")}
+                  {t("contact.form.privacy", "Your information will never be shared with third parties.")}
                 </p>
               </CardFooter>
             </Card>
